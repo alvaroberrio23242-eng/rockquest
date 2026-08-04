@@ -1,9 +1,36 @@
-<ul class="navbar-links">
-    <li><a href="{{ url_for('main.index') }}">Inicio</a></li>
-    <li><a href="{{ url_for('main.historia') }}">Historia</a></li>
-    <li><a href="{{ url_for('main.linea_del_tiempo') }}">Línea del tiempo</a></li>
-    <li><a href="{{ url_for('main.decadas') }}">Décadas</a></li>
-    <li><a href="{{ url_for('main.subgeneros') }}">Subgéneros</a></li>
-    <li><a href="{{ url_for('main.bandas') }}">Bandas</a></li>
-    <li><a href="{{ url_for('main.artistas') }}">Artistas</a></li>
-</ul>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}RockQuest{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hover.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <video id="video-bg" autoplay muted loop playsinline
+           poster="{{ url_for('static', filename='images/rock-poster.jpg') }}"
+           data-base-url="{{ url_for('static', filename='videos/') }}"></video>
+    <div class="video-overlay"></div>
+
+    <nav class="navbar">
+        <div class="navbar-logo">ROCK<span>QUEST</span></div>
+        <ul class="navbar-links">
+            <li><a class="hvr-underline-from-center" href="{{ url_for('main.index') }}">Inicio</a></li>
+            <li><a class="hvr-underline-from-center" href="{{ url_for('main.historia') }}">Historia</a></li>
+            <li><a class="hvr-underline-from-center" href="{{ url_for('main.linea_del_tiempo') }}">Línea del tiempo</a></li>
+            <li><a class="hvr-underline-from-center" href="{{ url_for('main.decadas') }}">Décadas</a></li>
+            <li><a class="hvr-underline-from-center" href="{{ url_for('main.subgeneros') }}">Subgéneros</a></li>
+            <li><a class="hvr-underline-from-center" href="{{ url_for('main.bandas') }}">Bandas</a></li>
+            <li><a class="hvr-underline-from-center" href="{{ url_for('main.artistas') }}">Artistas</a></li>
+        </ul>
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <script src="{{ url_for('static', filename='js/video-bg.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

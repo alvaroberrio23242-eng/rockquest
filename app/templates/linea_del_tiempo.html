@@ -4,13 +4,22 @@
 <section class="page-header">
     <div class="page-header-glass">
         <h1 class="page-title">Línea del <span>Tiempo</span></h1>
-        <p class="page-subtitle">Recorre los eventos que marcaron la historia del Rock.</p>
+        <p class="page-subtitle">Los momentos puntuales que marcaron un antes y un después.</p>
     </div>
 </section>
+
 <section class="content-section">
-    <div class="content-glass">
-        <h2>Próximamente</h2>
-        <p>Aquí irá la línea de tiempo interactiva con los hitos más importantes del género.</p>
+    <div class="timeline-vertical">
+        {% for hito in hitos %}
+        <div class="timeline-item hvr-grow">
+            <div class="timeline-dot"></div>
+            <div class="timeline-item-content content-glass">
+                <span class="timeline-anio">{{ hito.anio }}</span>
+                <h3>{{ hito.titulo }}</h3>
+                <p>{{ hito.descripcion }}</p>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </section>
 {% endblock %}

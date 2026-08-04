@@ -7,10 +7,38 @@
         <p class="page-subtitle">Cómo evolucionó el sonido década tras década.</p>
     </div>
 </section>
+
 <section class="content-section">
-    <div class="content-glass">
-        <h2>Próximamente</h2>
-        <p>Selector de décadas (50s, 60s, 70s...) con sus artistas y sonidos representativos.</p>
+    <div class="decadas-stack">
+        {% for decada in decadas %}
+        <div class="content-glass decada-card">
+            <div class="decada-encabezado">
+                <h2>{{ decada.nombre }}</h2>
+                <span class="decada-anios">{{ decada.rango_anios }}</span>
+            </div>
+            <p>{{ decada.descripcion }}</p>
+
+            <div class="decada-chips">
+                {% for sub in decada.subgeneros %}
+                <span class="chip hvr-grow">{{ sub }}</span>
+                {% endfor %}
+            </div>
+
+            {% set bandas_decada = bandas_por_decada.get(decada.slug, []) %}
+            <div class="decada-bandas">
+                <h3>Bandas destacadas de esta década</h3>
+                {% if bandas_decada %}
+                <ul class="decada-bandas-lista">
+                    {% for banda in bandas_decada %}
+                    <li class="hvr-underline-from-center">{{ banda.nombre }} <span class="decada-banda-genero">— {{ banda.genero }}</span></li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="decada-sin-bandas">Todavía no hay bandas cargadas de esta década en la base de datos.</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </section>
 {% endblock %}

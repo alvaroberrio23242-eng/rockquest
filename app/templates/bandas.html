@@ -7,10 +7,24 @@
         <p class="page-subtitle">Las agrupaciones que definieron el Rock.</p>
     </div>
 </section>
+
 <section class="content-section">
-    <div class="content-glass">
-        <h2>Próximamente</h2>
-        <p>Listado de bandas con biografía, discografía y galería — aquí conectaremos la base de datos.</p>
+    <div class="content-glass" style="max-width: 1100px;">
+        <div style="margin-bottom: 1.5rem; display: flex; gap: 0.8rem; flex-wrap: wrap;">
+            <a href="{{ url_for('main.bandas', orden='popularidad') }}" class="filter-btn hvr-grow {% if orden_actual == 'popularidad' %}active{% endif %}">Popularidad</a>
+            <a href="{{ url_for('main.bandas', orden='grammys') }}" class="filter-btn hvr-grow {% if orden_actual == 'grammys' %}active{% endif %}">Grammys</a>
+            <a href="{{ url_for('main.bandas', orden='ventas') }}" class="filter-btn hvr-grow {% if orden_actual == 'ventas' %}active{% endif %}">Ventas</a>
+            <a href="{{ url_for('main.bandas', orden='influencia') }}" class="filter-btn hvr-grow {% if orden_actual == 'influencia' %}active{% endif %}">Influencia</a>
+        </div>
+
+        {% for banda in bandas %}
+        <div class="banda-card hvr-float-shadow">
+            <h3>{{ loop.index }}. {{ banda.nombre }}</h3>
+            <p class="banda-meta">{{ banda.pais }} · {{ banda.genero }} · {{ banda.anio_formacion }}{% if banda.anio_disolucion %}–{{ banda.anio_disolucion }}{% endif %}</p>
+            <p>{{ banda.biografia }}</p>
+            <p class="banda-stats">⭐ {{ banda.popularidad }} &nbsp; 🏆 {{ banda.grammys_totales }} Grammys &nbsp; 💿 {{ "{:,}".format(banda.ventas_estimadas) }} ventas</p>
+        </div>
+        {% endfor %}
     </div>
 </section>
 {% endblock %}

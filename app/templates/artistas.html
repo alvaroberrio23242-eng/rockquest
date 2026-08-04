@@ -4,13 +4,27 @@
 <section class="page-header">
     <div class="page-header-glass">
         <h1 class="page-title"><span>Artistas</span></h1>
-        <p class="page-subtitle">Las figuras que le dieron voz al Rock.</p>
+        <p class="page-subtitle">Las voces y los instrumentos detrás de las bandas.</p>
     </div>
 </section>
+
 <section class="content-section">
-    <div class="content-glass">
-        <h2>Próximamente</h2>
-        <p>Perfiles individuales de artistas, con biografía y aportes al género.</p>
+    <div class="content-glass" style="max-width: 1100px;">
+        {% if artistas %}
+        {% for artista in artistas %}
+        <div class="banda-card hvr-float-shadow">
+            <h3>{{ artista.nombre }}</h3>
+            <p class="banda-meta">
+                {{ artista.instrumento_principal }} · {{ artista.banda_principal }} · {{ artista.pais }}
+                · {{ artista.anio_nacimiento }}{% if artista.anio_fallecimiento %}–{{ artista.anio_fallecimiento }}{% endif %}
+            </p>
+            <p>{{ artista.biografia }}</p>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h2>Todavía no hay artistas cargados</h2>
+        <p>Corré <code>python -m app.seed_artistas</code> para cargar los perfiles iniciales.</p>
+        {% endif %}
     </div>
 </section>
 {% endblock %}

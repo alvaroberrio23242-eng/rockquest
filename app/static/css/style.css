@@ -2,9 +2,33 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background: radial-gradient(circle at top, #1a0a2e 0%, #0a0a12 60%, #000 100%);
+    background-color: #0a0a12; /* respaldo mientras carga o si falla el video */
     color: #f0f0f0;
     min-height: 100vh;
+}
+
+/* ==========================================
+   FONDO DE VIDEO ROTATIVO
+   ========================================== */
+.video-bg-container {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -3;
+    background-color: #0a0a12;
+}
+#video-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.video-bg-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background: rgba(10, 8, 18, 0.62);
 }
 
 .navbar {
@@ -74,6 +98,412 @@ body {
 
 @media (max-width: 768px) {
     .navbar { flex-direction: column; gap: 1rem; padding: 1rem; }
+    .navbar-links { flex-wrap: wrap; justify-content: center; gap: 0.9rem 1.4rem; }
+    .navbar-links a { font-size: 0.85rem; }
     .hero-glass { padding: 2rem; }
     .hero-title { font-size: 2rem; }
+}
+.filter-btn {
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+.filter-btn:hover, .filter-btn.active {
+    background: rgba(0, 234, 255, 0.15);
+    border-color: #00eaff;
+    color: #00eaff;
+}
+
+.banda-card {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.banda-card:last-child { border-bottom: none; }
+.banda-card h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    margin-bottom: 0.3rem;
+}
+.banda-meta { color: #ff00ff; font-size: 0.85rem; margin-bottom: 0.5rem; }
+.banda-stats { color: #00eaff; font-size: 0.85rem; margin-top: 0.5rem; }
+/* ==========================================================
+   CLASES FALTANTES: encabezado de pagina y tarjeta de contenido
+   (usadas por bandas.html, decadas.html, subgeneros.html,
+   linea_del_tiempo.html, artistas.html -- antes no estaban
+   definidas y esas paginas se veian sin ningun estilo)
+   ========================================================== */
+.page-header {
+    display: flex;
+    justify-content: center;
+    padding: 3rem 2rem 1rem;
+}
+.page-header-glass {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 20px;
+    padding: 2rem 3rem;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(255, 0, 255, 0.12);
+    animation: fadeInUp 0.8s ease;
+}
+.page-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+}
+.page-title span { color: #ff00ff; text-shadow: 0 0 14px #ff00ff; }
+.page-subtitle { color: #aaa; font-size: 1rem; }
+
+.content-section {
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem 2rem 4rem;
+}
+.content-glass {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 20px;
+    padding: 2.5rem 3rem;
+    width: 100%;
+    max-width: 800px;
+}
+.content-glass h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: #00eaff;
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+}
+.content-glass p { color: #ccc; line-height: 1.6; }
+
+/* ==========================================================
+   PARALLAX: capas decorativas de fondo (jquery.parallax.js)
+   Mientras no haya fotos de fondo reales, son "glows" borrosos
+   que se mueven a distinta velocidad al hacer scroll -- da
+   sensacion de profundidad sin depender de imagenes.
+   ========================================================== */
+#parallax-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+.parallax-layer {
+    position: absolute;
+    width: 60vw;
+    height: 60vw;
+    max-width: 700px;
+    max-height: 700px;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.35;
+}
+.parallax-glow-magenta {
+    top: -10%;
+    left: -10%;
+    background: radial-gradient(circle, #ff00ff 0%, transparent 70%);
+}
+.parallax-glow-cyan {
+    bottom: -15%;
+    right: -10%;
+    background: radial-gradient(circle, #00eaff 0%, transparent 70%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .parallax-layer { display: none; }
+}
+
+/* ==========================================================
+   HOVER.CSS aplicado: tarjetas de bandas y botones de filtro
+   ========================================================== */
+.banda-card {
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+.banda-card.hvr-float-shadow {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* ==========================================================
+   SECCION DECADAS
+   ========================================================== */
+.decadas-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 800px;
+}
+.decada-card { max-width: none; }
+
+.decada-encabezado {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.6rem;
+}
+.decada-encabezado h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: #ff00ff;
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
+    font-size: 1.4rem;
+    margin: 0;
+}
+.decada-anios {
+    color: #00eaff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+}
+
+.decada-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+.chip {
+    display: inline-block;
+    background: rgba(0, 234, 255, 0.1);
+    border: 1px solid rgba(0, 234, 255, 0.35);
+    color: #00eaff;
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+}
+
+.decada-bandas {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 1rem;
+    padding-top: 1rem;
+}
+.decada-bandas h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.95rem;
+    color: #fff;
+    margin-bottom: 0.6rem;
+}
+.decada-bandas-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+.decada-bandas-lista li {
+    color: #eee;
+    font-weight: 600;
+}
+.decada-banda-genero {
+    color: #999;
+    font-weight: 400;
+    font-size: 0.85rem;
+}
+.decada-sin-bandas {
+    color: #777;
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+/* ==========================================================
+   LINEA DEL TIEMPO VERTICAL
+   ========================================================== */
+.timeline-vertical {
+    position: relative;
+    max-width: 700px;
+    width: 100%;
+    padding-left: 2.2rem;
+}
+.timeline-vertical::before {
+    content: '';
+    position: absolute;
+    left: 0.4rem;
+    top: 0.4rem;
+    bottom: 0.4rem;
+    width: 2px;
+    background: linear-gradient(180deg, #ff00ff, #00eaff);
+    opacity: 0.5;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 1.6rem;
+}
+.timeline-dot {
+    position: absolute;
+    left: -2.2rem;
+    top: 0.35rem;
+    width: 0.9rem;
+    height: 0.9rem;
+    border-radius: 50%;
+    background: #ff00ff;
+    box-shadow: 0 0 10px #ff00ff, 0 0 20px rgba(255, 0, 255, 0.5);
+}
+
+.timeline-item-content {
+    max-width: none;
+    width: 100%;
+    padding: 1.2rem 1.5rem;
+}
+.timeline-anio {
+    display: inline-block;
+    font-family: 'Orbitron', sans-serif;
+    color: #00eaff;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+}
+.timeline-item-content h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    font-size: 1.05rem;
+    margin: 0.2rem 0 0.5rem;
+}
+.timeline-item-content p {
+    color: #ccc;
+    line-height: 1.55;
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+    .timeline-vertical { padding-left: 1.6rem; }
+    .timeline-dot { left: -1.6rem; }
+}
+
+/* ==========================================================
+   SECCION SUBGENEROS
+   ========================================================== */
+.subgeneros-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.2rem;
+    width: 100%;
+    max-width: 1100px;
+}
+.subgenero-card { max-width: none; padding: 1.6rem; }
+
+.subgenero-encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.6rem;
+    margin-bottom: 0.6rem;
+}
+.subgenero-encabezado h2 {
+    font-size: 1.1rem;
+    margin: 0;
+}
+.subgenero-bandas {
+    margin-top: 1rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.85rem;
+    color: #00eaff;
+}
+
+/* ==========================================================
+   SECCION TRIVIA
+   ========================================================== */
+.trivia-pregunta {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.15rem;
+    color: #fff;
+    margin-bottom: 1.4rem;
+}
+.trivia-opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+.trivia-opcion-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #eee;
+    padding: 0.8rem 1.2rem;
+    border-radius: 10px;
+    text-align: left;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+.trivia-opcion-btn:disabled { cursor: default; }
+.trivia-opcion-btn.trivia-correcta {
+    border-color: #00eaff;
+    background: rgba(0, 234, 255, 0.12);
+    color: #00eaff;
+}
+.trivia-opcion-btn.trivia-incorrecta {
+    border-color: #ff3860;
+    background: rgba(255, 56, 96, 0.12);
+    color: #ff8fa3;
+}
+
+.trivia-feedback {
+    margin-top: 1.2rem;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    min-height: 1.4rem;
+}
+.trivia-feedback-ok { color: #00eaff; }
+.trivia-feedback-error { color: #ff3860; }
+
+.trivia-siguiente-btn {
+    margin-top: 1.2rem;
+    border: none;
+    cursor: pointer;
+}
+
+/* ==========================================================
+   PULIDO MOBILE: los paddings pensados para desktop (2.5-3rem)
+   dejaban muy poco ancho util en un celular chico. Se reducen
+   acá sin tocar el look en pantallas grandes.
+   ========================================================== */
+@media (max-width: 600px) {
+    .page-header { padding: 2rem 1rem 0.5rem; }
+    .page-header-glass { padding: 1.5rem 1.5rem; }
+    .page-title { font-size: 1.7rem; }
+
+    .content-section { padding: 1rem 1rem 3rem; }
+    .content-glass { padding: 1.5rem 1.3rem; }
+
+    .decada-encabezado { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+    .subgeneros-grid { grid-template-columns: 1fr; }
+    .subgenero-card { padding: 1.3rem; }
+
+    .banda-card { padding: 1.2rem; }
+    .banda-stats { font-size: 0.85rem; }
+
+    .trivia-pregunta { font-size: 1rem; }
+    .trivia-opcion-btn { padding: 0.7rem 1rem; font-size: 0.9rem; }
+}
+
+#video-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -3;
+}
+
+.video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(5, 0, 15, 0.65);
+    z-index: -2;
 }

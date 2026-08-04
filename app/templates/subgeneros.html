@@ -3,14 +3,29 @@
 {% block content %}
 <section class="page-header">
     <div class="page-header-glass">
-        <h1 class="page-title">Sub<span>géneros</span></h1>
-        <p class="page-subtitle">Punk, Metal, Grunge, Progresivo, y muchos más.</p>
+        <h1 class="page-title">Subg<span>éneros</span></h1>
+        <p class="page-subtitle">Del rock and roll original a sus ramificaciones más recientes.</p>
     </div>
 </section>
+
 <section class="content-section">
-    <div class="content-glass">
-        <h2>Próximamente</h2>
-        <p>Catálogo de subgéneros con su origen, características y bandas representativas.</p>
+    <div class="subgeneros-grid">
+        {% for sub in subgeneros %}
+        <div class="content-glass subgenero-card hvr-float-shadow">
+            <div class="subgenero-encabezado">
+                <h2>{{ sub.nombre }}</h2>
+                <span class="chip">{{ sub.decada_origen }}</span>
+            </div>
+            <p>{{ sub.descripcion }}</p>
+
+            {% set bandas_sub = bandas_por_subgenero.get(sub.slug, []) %}
+            {% if bandas_sub %}
+            <p class="subgenero-bandas">
+                💿 En RockQuest: {% for b in bandas_sub %}{{ b.nombre }}{% if not loop.last %}, {% endif %}{% endfor %}
+            </p>
+            {% endif %}
+        </div>
+        {% endfor %}
     </div>
 </section>
 {% endblock %}
