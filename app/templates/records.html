@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}RockQuest — Récords{% endblock %}
+{% block content %}
+<section class="page-header">
+    <div class="page-header-glass">
+        <h1 class="page-title"><span>Récords</span></h1>
+        <p class="page-subtitle">Las marcas históricas que dejó el rock.</p>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="content-glass" style="max-width: 1100px;">
+        {% if records %}
+        {% for record in records %}
+        <div class="banda-card hvr-float-shadow card-con-imagen">
+            <div class="card-thumb">
+                <img src="{{ record.imagen_url or url_for('static', filename='images/placeholder.svg') }}"
+                     alt="{{ record.titulo }} — {{ record.poseedor }}"
+                     loading="lazy"
+                     onerror="this.onerror=null;this.src='{{ url_for('static', filename='images/placeholder.svg') }}';">
+            </div>
+            <div class="card-body">
+                <h3>{{ record.titulo }}</h3>
+                <p class="banda-meta">
+                    {{ record.poseedor }}{% if record.categoria %} · {{ record.categoria }}{% endif %}{% if record.anio %} · {{ record.anio }}{% endif %}
+                </p>
+                {% if record.valor %}<p class="banda-stats">📈 {{ record.valor }}</p>{% endif %}
+                <p>{{ record.descripcion }}</p>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h2>Todavía no hay récords cargados</h2>
+        <p>Corré <code>python -m app.seed_records</code> para cargar los récords iniciales.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

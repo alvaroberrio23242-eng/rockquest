@@ -12,13 +12,21 @@
     <div class="content-glass" style="max-width: 1100px;">
         {% if artistas %}
         {% for artista in artistas %}
-        <div class="banda-card hvr-float-shadow">
-            <h3>{{ artista.nombre }}</h3>
-            <p class="banda-meta">
-                {{ artista.instrumento_principal }} · {{ artista.banda_principal }} · {{ artista.pais }}
-                · {{ artista.anio_nacimiento }}{% if artista.anio_fallecimiento %}–{{ artista.anio_fallecimiento }}{% endif %}
-            </p>
-            <p>{{ artista.biografia }}</p>
+        <div class="banda-card hvr-float-shadow card-con-imagen">
+            <div class="card-thumb">
+                <img src="{{ artista.imagen_url or url_for('static', filename='images/placeholder.svg') }}"
+                     alt="Foto de {{ artista.nombre }}"
+                     loading="lazy"
+                     onerror="this.onerror=null;this.src='{{ url_for('static', filename='images/placeholder.svg') }}';">
+            </div>
+            <div class="card-body">
+                <h3>{{ artista.nombre }}</h3>
+                <p class="banda-meta">
+                    {{ artista.instrumento_principal }} · {{ artista.banda_principal }} · {{ artista.pais }}
+                    · {{ artista.anio_nacimiento }}{% if artista.anio_fallecimiento %}–{{ artista.anio_fallecimiento }}{% endif %}
+                </p>
+                <p>{{ artista.biografia }}</p>
+            </div>
         </div>
         {% endfor %}
         {% else %}

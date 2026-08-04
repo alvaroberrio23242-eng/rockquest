@@ -18,11 +18,19 @@
         </div>
 
         {% for banda in bandas %}
-        <div class="banda-card hvr-float-shadow">
-            <h3>{{ loop.index }}. {{ banda.nombre }}</h3>
-            <p class="banda-meta">{{ banda.pais }} · {{ banda.genero }} · {{ banda.anio_formacion }}{% if banda.anio_disolucion %}–{{ banda.anio_disolucion }}{% endif %}</p>
-            <p>{{ banda.biografia }}</p>
-            <p class="banda-stats">⭐ {{ banda.popularidad }} &nbsp; 🏆 {{ banda.grammys_totales }} Grammys &nbsp; 💿 {{ "{:,}".format(banda.ventas_estimadas) }} ventas</p>
+        <div class="banda-card hvr-float-shadow card-con-imagen">
+            <div class="card-thumb">
+                <img src="{{ banda.imagen_url or url_for('static', filename='images/placeholder.svg') }}"
+                     alt="Foto de {{ banda.nombre }}"
+                     loading="lazy"
+                     onerror="this.onerror=null;this.src='{{ url_for('static', filename='images/placeholder.svg') }}';">
+            </div>
+            <div class="card-body">
+                <h3>{{ loop.index }}. {{ banda.nombre }}</h3>
+                <p class="banda-meta">{{ banda.pais }} · {{ banda.genero }} · {{ banda.anio_formacion }}{% if banda.anio_disolucion %}–{{ banda.anio_disolucion }}{% endif %}</p>
+                <p>{{ banda.biografia }}</p>
+                <p class="banda-stats">⭐ {{ banda.popularidad }} &nbsp; 🏆 {{ banda.grammys_totales }} Grammys &nbsp; 💿 {{ "{:,}".format(banda.ventas_estimadas) }} ventas</p>
+            </div>
         </div>
         {% endfor %}
     </div>

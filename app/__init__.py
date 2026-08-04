@@ -1,12 +1,16 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 db = SQLAlchemy()
 
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'dev-secret-key-cambiar-en-produccion'
+    # En producción, definí la variable de entorno SECRET_KEY con un valor
+    # aleatorio y secreto (ej. `python -c "import secrets; print(secrets.token_hex(32))"`).
+    # Si no está definida, se usa una clave de desarrollo (NO usar en producción).
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-secret-key-cambiar-en-produccion')
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///rockquest.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -18,6 +22,8 @@ def create_app():
     with app.app_context():
         from app.models import banda
         from app.models import artista
+        from app.models import grammy
+        from app.models import record
         db.create_all()
 
     return app

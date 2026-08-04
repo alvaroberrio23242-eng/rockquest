@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, request
 from app.models.banda import Banda
 from app.models.artista import Artista
+from app.models.grammy import Grammy
+from app.models.record import Record
 from app.models.decadas_data import DECADAS
 from app.models.linea_tiempo_data import HITOS
 from app.models.subgeneros_data import SUBGENEROS
@@ -73,3 +75,15 @@ def artistas():
 @main_bp.route('/trivia')
 def trivia():
     return render_template('trivia.html', preguntas=PREGUNTAS)
+
+
+@main_bp.route('/grammys')
+def grammys():
+    lista_grammys = Grammy.query.order_by(Grammy.anio.desc()).all()
+    return render_template('grammys.html', grammys=lista_grammys)
+
+
+@main_bp.route('/records')
+def records():
+    lista_records = Record.query.order_by(Record.anio.desc()).all()
+    return render_template('records.html', records=lista_records)

@@ -12,11 +12,15 @@
 
     const baseUrl = video.dataset.baseUrl || '';
 
-    const clips = [
-        'rock-1.mp4',
-        'rock-2.mp4',
-        'rock-3.mp4',
-    ];
+    // Lista de clips: la define cada página vía el atributo
+    // data-clips en base.html (bloque Jinja {% block video_clips %}).
+    // Si una página no lo sobre-escribe, usa la rotación por defecto
+    // (rock-1, rock-2, rock-3); Inicio, por ejemplo, la sobre-escribe
+    // para mostrar solo "rock-2.mp4" de fondo.
+    const clips = (video.dataset.clips || 'rock-1.mp4,rock-2.mp4,rock-3.mp4')
+        .split(',')
+        .map(c => c.trim())
+        .filter(Boolean);
 
     let indice = 0;
     let intentosFallidos = 0;

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}RockQuest — Grammys{% endblock %}
+{% block content %}
+<section class="page-header">
+    <div class="page-header-glass">
+        <h1 class="page-title"><span>Grammys</span></h1>
+        <p class="page-subtitle">Los reconocimientos que celebraron al rock.</p>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="content-glass" style="max-width: 1100px;">
+        {% if grammys %}
+        {% for premio in grammys %}
+        <div class="banda-card hvr-float-shadow card-con-imagen">
+            <div class="card-thumb">
+                <img src="{{ premio.imagen_url or url_for('static', filename='images/placeholder.svg') }}"
+                     alt="{{ premio.categoria }} — {{ premio.ganador }}"
+                     loading="lazy"
+                     onerror="this.onerror=null;this.src='{{ url_for('static', filename='images/placeholder.svg') }}';">
+            </div>
+            <div class="card-body">
+                <h3>{{ premio.anio }} · {{ premio.categoria }}</h3>
+                <p class="banda-meta">🏆 {{ premio.ganador }}{% if premio.obra %} — {{ premio.obra }}{% endif %}</p>
+                <p>{{ premio.descripcion }}</p>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h2>Todavía no hay premios cargados</h2>
+        <p>Corré <code>python -m app.seed_grammys</code> para cargar los premios iniciales.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
