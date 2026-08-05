@@ -28,6 +28,9 @@ artistas_iniciales = [
 ]
 
 with app.app_context():
-    db.session.bulk_save_objects(artistas_iniciales)
-    db.session.commit()
-    print(f"{len(artistas_iniciales)} artistas insertados correctamente.")
+    if Banda.query.count() == 0:
+        db.session.bulk_save_objects(bandas_iniciales)
+        db.session.commit()
+        print(f"{len(bandas_iniciales)} bandas insertadas correctamente.")
+    else:
+        print("La tabla de bandas ya tiene datos, no se volvio a sembrar.")
