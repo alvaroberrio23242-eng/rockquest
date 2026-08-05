@@ -12,8 +12,7 @@
 <body>
     <video id="video-bg" autoplay muted loop playsinline
            poster="{{ url_for('static', filename='images/rock-poster.jpg') }}"
-           data-base-url="{{ url_for('static', filename='videos/') }}"
-           data-clips="{% block video_clips %}rock-1.mp4,rock-2.mp4,rock-3.mp4{% endblock %}"></video>
+           data-base-url="{{ url_for('static', filename='videos/') }}"></video>
     <div class="video-overlay"></div>
 
     <nav class="navbar">
@@ -26,8 +25,6 @@
             <li><a class="hvr-underline-from-center" href="{{ url_for('main.subgeneros') }}">Subgéneros</a></li>
             <li><a class="hvr-underline-from-center" href="{{ url_for('main.bandas') }}">Bandas</a></li>
             <li><a class="hvr-underline-from-center" href="{{ url_for('main.artistas') }}">Artistas</a></li>
-            <li><a class="hvr-underline-from-center" href="{{ url_for('main.grammys') }}">Grammys</a></li>
-            <li><a class="hvr-underline-from-center" href="{{ url_for('main.records') }}">Récords</a></li>
         </ul>
     </nav>
     <main>

@@ -229,38 +229,58 @@ body {
     border-radius: 12px;
     padding: 1.5rem;
     margin-bottom: 0.5rem;
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .banda-card.hvr-float-shadow {
     background: rgba(255, 255, 255, 0.03);
 }
+/* La sombra que hover.css proyecta debajo de la tarjeta (::before de
+   hvr-float-shadow) por defecto es gris/negra; la re-tinteamos a
+   magenta/cian para que combine con el resto del neón del sitio. */
+.banda-card.hvr-float-shadow:before {
+    background: radial-gradient(ellipse at center, rgba(255, 0, 255, 0.45) 0%, rgba(0, 234, 255, 0) 80%);
+}
+/* Además del "float" (que solo mueve la tarjeta), sumamos un borde
+   que se enciende en neón al pasar el mouse -- toca box-shadow/border,
+   propiedades que hvr-float-shadow no usa, así que no pisa su animación. */
+.banda-card.hvr-float-shadow:hover,
+.banda-card.hvr-float-shadow:focus {
+    border-color: rgba(0, 234, 255, 0.5);
+    box-shadow: 0 0 22px rgba(255, 0, 255, 0.18), inset 0 0 18px rgba(0, 234, 255, 0.06);
+}
 
 /* ==========================================================
-   MEDIA: thumbnail de bandas/artistas/grammys/records
+   IMAGEN DE BANDA / ARTISTA (sincronizada desde OSINT Search Pro)
    ========================================================== */
-.card-con-imagen {
+.banda-card-inner {
     display: flex;
-    gap: 1.3rem;
     align-items: flex-start;
+    gap: 1.2rem;
 }
-.card-thumb {
-    flex: 0 0 96px;
-    width: 96px;
-    height: 96px;
+.banda-img {
+    flex: 0 0 auto;
+    width: 84px;
+    height: 84px;
     border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(255, 255, 255, 0.03);
-}
-.card-thumb img {
-    width: 100%;
-    height: 100%;
     object-fit: cover;
-    display: block;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 16px rgba(255, 0, 255, 0.15);
+    cursor: default;
 }
-.card-body { flex: 1 1 auto; min-width: 0; }
+.banda-img-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    background: linear-gradient(135deg, rgba(255, 0, 255, 0.18), rgba(0, 234, 255, 0.18));
+}
+.banda-info { flex: 1 1 auto; min-width: 0; }
 @media (max-width: 600px) {
-    .card-con-imagen { flex-direction: column; align-items: center; text-align: center; }
-    .card-thumb { flex-basis: 120px; width: 120px; height: 120px; }
+    .banda-card-inner { flex-direction: column; align-items: center; text-align: center; }
+    .banda-info { text-align: left; width: 100%; }
 }
 
 /* ==========================================================
