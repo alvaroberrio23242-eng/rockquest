@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
@@ -6,7 +8,15 @@ db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'dev-secret-key-cambiar-en-produccion'
+    # La clave de sesiones NUNCA se hardcodea: sin SECRET_KEY en el
+    # entorno la app se niega a arrancar (fail-fast).
+    secret_key = os.environ.get('SECRET_KEY')
+    if not secret_key:
+        raise RuntimeError(
+            "SECRET_KEY no esta configurada. Definela como variable de "
+            "entorno antes de arrancar la aplicacion."
+        )
+    app.config['SECRET_KEY'] = secret_key
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///rockquest.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
