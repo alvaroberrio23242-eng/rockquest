@@ -7,10 +7,34 @@
         <p class="page-subtitle">Cómo nació el rock y cómo se transformó con el tiempo.</p>
     </div>
 </section>
+
 <section class="content-section">
-    <div class="content-glass">
-        <h2>Próximamente</h2>
-        <p>El relato general del origen del rock (blues, rock and roll de los 50s) y su evolución hasta hoy.</p>
+    <div class="decadas-stack">
+        {% for cap in capitulos %}
+        <div class="content-glass decada-card" id="{{ cap.slug }}">
+            <div class="decada-encabezado">
+                <h2>{{ cap.titulo }}</h2>
+                <span class="decada-anios">{{ cap.rango }}</span>
+            </div>
+            <p>{{ cap.texto }}</p>
+            <div class="decada-chips">
+                {% for d in cap.destacados %}
+                <span class="chip hvr-grow">{{ d }}</span>
+                {% endfor %}
+            </div>
+            {% if cap.enlace %}
+            <p><a class="hvr-underline-from-center" href="{{ cap.enlace.href }}">{{ cap.enlace.texto }} →</a></p>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <div class="content-glass decada-card">
+            <h2>Sigue explorando</h2>
+            <p>
+                <a class="hvr-underline-from-center" href="/linea-del-tiempo">Línea del tiempo</a> ·
+                <a class="hvr-underline-from-center" href="/decadas">Rock por décadas</a> ·
+                <a class="hvr-underline-from-center" href="/subgeneros">Subgéneros</a>
+            </p>
+        </div>
     </div>
 </section>
 {% endblock %}

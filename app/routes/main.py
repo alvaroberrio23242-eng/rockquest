@@ -5,6 +5,7 @@ from app.models.grammy import Grammy
 from app.models.record import Record
 from app.models.decadas_data import DECADAS
 from app.models.linea_tiempo_data import HITOS
+from app.models.historia_data import CAPITULOS
 from app.models.subgeneros_data import SUBGENEROS
 from app.models.trivia_data import PREGUNTAS
 from app.models.ruta_rockera_data import get_verified_places
@@ -19,7 +20,7 @@ def index():
 
 @main_bp.route('/historia')
 def historia():
-    return render_template('historia.html')
+    return render_template('historia.html', capitulos=CAPITULOS)
 
 
 @main_bp.route('/linea-del-tiempo')
