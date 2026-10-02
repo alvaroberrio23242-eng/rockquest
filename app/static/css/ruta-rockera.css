@@ -12,3 +12,10 @@
   .ruta-rockera-layout { grid-template-columns: 1fr; }
   #ruta-rockera-map { height: 55vh; min-height: 360px; }
 }
+
+/* RUTA-CONTROLS-STYLE */
+.ruta-rockera-panel label { display: block; font-size: .85rem; color: #ccc; }
+#search-place, #filter-type, #filter-city { width: 100%; box-sizing: border-box; padding: .5rem .6rem; margin: .25rem 0 .75rem; background: rgba(255,255,255,.08); color: #fff; border: 1px solid rgba(255,255,255,.25); border-radius: 8px; font: inherit; }
+#filter-type option, #filter-city option { background: #1a1a1a; color: #fff; }
+.ruta-rockera-reset { padding: .4rem 1rem; border-radius: 20px; border: 1px solid #00eaff; background: transparent; color: #00eaff; cursor: pointer; font: inherit; }
+.ruta-rockera-reset:hover { background: rgba(0,234,255,.15); }

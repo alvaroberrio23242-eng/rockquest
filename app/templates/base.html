@@ -11,7 +11,7 @@
     {% block head %}{% endblock %}
 </head>
 <body>
-    <video id="video-bg" autoplay muted loop playsinline
+    <video id="video-bg" autoplay muted playsinline
            poster="{{ url_for('static', filename='images/rock-poster.jpg') }}"
            data-base-url="{{ url_for('static', filename='videos/') }}"></video>
     <div class="video-overlay"></div>
@@ -40,5 +40,6 @@
     {% block scripts %}{% endblock %}
 </body>
 </html>
+
 
 
