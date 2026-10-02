@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}RockQuest — Trivia{% endblock %}
+{% block content %}
+<section class="page-header">
+    <div class="page-header-glass">
+        <h1 class="page-title">Trivia <span>Rockera</span></h1>
+        <p class="page-subtitle">Poné a prueba lo que sabés de rock.</p>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="content-glass trivia-box" style="max-width: 600px;">
+        <div id="trivia-pregunta" class="trivia-pregunta"></div>
+        <div id="trivia-opciones" class="trivia-opciones"></div>
+        <div id="trivia-feedback" class="trivia-feedback"></div>
+        <button id="trivia-siguiente" class="filter-btn hvr-grow trivia-siguiente-btn" style="display:none;">
+            Siguiente pregunta →
+        </button>
+    </div>
+</section>
+
+<script type="application/json" id="trivia-datos">{{ preguntas | tojson }}</script>
+<script src="{{ url_for('static', filename='js/trivia.js') }}"></script>
+{% endblock %}

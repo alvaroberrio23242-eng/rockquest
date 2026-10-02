@@ -17,6 +17,9 @@ def create_app():
             "entorno antes de arrancar la aplicacion."
         )
     app.config['SECRET_KEY'] = secret_key
+    # SQLite local: en Render (plan gratuito) el disco es efimero, la
+    # BD se pierde en cada redeploy y build.sh vuelve a sembrar los
+    # datos base. Solucion futura: base de datos persistente (PostgreSQL).
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///rockquest.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -31,6 +34,8 @@ def create_app():
     with app.app_context():
         from app.models import banda
         from app.models import artista
+        from app.models import grammy
+        from app.models import record
         db.create_all()
 
     return app
