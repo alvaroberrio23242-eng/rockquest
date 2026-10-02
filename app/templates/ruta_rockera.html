@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}Ruta Rockera — RockQuest{% endblock %}
+
+{% block head %}
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    crossorigin=""
+/>
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/ruta-rockera.css') }}"
+>
+{% endblock %}
+
+{% block content %}
+
+<section class="ruta-rockera-page">
+
+    <header class="ruta-rockera-header">
+        <div>
+            <span class="ruta-rockera-kicker">ROCKQUEST</span>
+            <h1>Ruta Rockera</h1>
+            <p>
+                Un recorrido por bares, escenarios, espacios culturales
+                y lugares históricos vinculados con el rock en Medellín
+                y el Valle de Aburrá.
+            </p>
+        </div>
+
+        <div class="ruta-rockera-stats">
+            <div>
+                <strong id="places-count">0</strong>
+                <span>lugares visibles</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="ruta-rockera-layout">
+
+        <aside class="ruta-rockera-panel">
+
+            <div class="ruta-rockera-panel-title">
+                <h2>Explorar</h2>
+                <button
+                    type="button"
+                    id="reset-map"
+                    class="ruta-rockera-reset"
+                >
+                    Ver todos
+                </button>
+            </div>
+
+            <label for="search-place">Buscar</label>
+            <input
+                id="search-place"
+                type="search"
+                placeholder="Bar, escenario, barrio..."
+                autocomplete="off"
+            >
+
+            <label for="filter-type">Tipo de lugar</label>
+            <select id="filter-type">
+                <option value="">Todos</option>
+                <option value="bar">Bares</option>
+                <option value="cultural">Culturales</option>
+                <option value="historical">Históricos</option>
+                <option value="event">Eventos / escenarios</option>
+            </select>
+
+            <label for="filter-city">Municipio</label>
+            <select id="filter-city">
+                <option value="">Todos</option>
+            </select>
+
+            <div class="ruta-rockera-legend">
+                <h3>Capas</h3>
+
+                <div>
+                    <span class="legend-dot legend-current"></span>
+                    Lugares actuales
+                </div>
+
+                <div>
+                    <span class="legend-dot legend-cultural"></span>
+                    Espacios culturales
+                </div>
+
+                <div>
+                    <span class="legend-dot legend-historical"></span>
+                    Lugares históricos
+                </div>
+            </div>
+
+            <div id="places-list" class="ruta-rockera-list"></div>
+
+        </aside>
+
+        <main class="ruta-rockera-map-wrapper">
+            <div
+                id="ruta-rockera-map"
+                aria-label="Mapa interactivo de la Ruta Rockera"
+            ></div>
+
+            <div
+                id="map-status"
+                class="ruta-rockera-map-status"
+                role="status"
+            >
+                Cargando lugares verificados...
+            </div>
+        </main>
+
+    </section>
+
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+></script>
+
+<script
+    src="{{ url_for('static', filename='js/ruta-rockera.js') }}"
+    defer
+></script>
+{% endblock %}
+

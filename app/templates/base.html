@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/hover.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block head %}{% endblock %}
 </head>
 <body>
     <video id="video-bg" autoplay muted loop playsinline
@@ -28,6 +29,7 @@
             <li><a class="hvr-underline-from-center" href="{{ url_for('main.grammys') }}">Grammys</a></li>
             <li><a class="hvr-underline-from-center" href="{{ url_for('main.records') }}">Récords</a></li>
             <li><a class="hvr-underline-from-center" href="{{ url_for('main.trivia') }}">Trivia</a></li>
+            <li><a class="hvr-underline-from-center" href="{{ url_for('main.ruta_rockera') }}">Ruta Rockera</a></li>
         </ul>
     </nav>
     <main>
@@ -35,5 +37,8 @@
     </main>
     <script src="{{ url_for('static', filename='js/video-bg.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block scripts %}{% endblock %}
 </body>
 </html>
+
+

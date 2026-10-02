@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, jsonify, render_template, request
 from app.models.banda import Banda
 from app.models.artista import Artista
 from app.models.grammy import Grammy
@@ -7,6 +7,7 @@ from app.models.decadas_data import DECADAS
 from app.models.linea_tiempo_data import HITOS
 from app.models.subgeneros_data import SUBGENEROS
 from app.models.trivia_data import PREGUNTAS
+from app.models.ruta_rockera_data import get_verified_places
 
 main_bp = Blueprint('main', __name__)
 
@@ -87,3 +88,19 @@ def records():
 @main_bp.route('/trivia')
 def trivia():
     return render_template('trivia.html', preguntas=PREGUNTAS)
+
+
+@main_bp.route('/ruta-rockera')
+def ruta_rockera():
+    return render_template('ruta_rockera.html')
+
+
+@main_bp.route('/api/ruta-rockera')
+def api_ruta_rockera():
+    places = get_verified_places()
+
+    return jsonify({
+        'places': places,
+        'count': len(places),
+    })
+
