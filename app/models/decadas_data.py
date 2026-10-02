@@ -80,3 +80,7 @@ DECADAS = [
         "subgeneros": ["Indie Rock", "Garage Rock Revival", "Nu Metal", "Pop Punk"],
     },
 ]
+
+
+from app.models.contenido_extra import DECADAS_EXTRA
+DECADAS = DECADAS + DECADAS_EXTRA

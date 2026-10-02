@@ -85,3 +85,7 @@ HITOS = [
         ),
     },
 ]
+
+
+from app.models.contenido_extra import HITOS_EXTRA
+HITOS = sorted(HITOS + HITOS_EXTRA, key=lambda h: h['anio'])
