@@ -201,10 +201,7 @@
             return null;
         }
 
-        const marker = L.marker([
-            coordinates.lat,
-            coordinates.lng
-        ]);
+        const group = ({ CULTURAL_VENUE: "cultural", MUSEUM: "cultural", HISTORICAL_SITE: "historical" })[place.type] || "bar"; const marker = L.marker([coordinates.lat, coordinates.lng], { icon: L.divIcon({ className: "rq-pin-wrap", html: '<span class="rq-pin rq-pin-' + group + '"></span>', iconSize: [18, 18], iconAnchor: [9, 9], popupAnchor: [0, -10] }) });
 
         marker.bindPopup(
             popupHtml(place),
@@ -523,5 +520,6 @@
 
     loadPlaces();
 })();
+
 
 

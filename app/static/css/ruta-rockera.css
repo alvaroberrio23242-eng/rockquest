@@ -19,3 +19,10 @@
 #filter-type option, #filter-city option { background: #1a1a1a; color: #fff; }
 .ruta-rockera-reset { padding: .4rem 1rem; border-radius: 20px; border: 1px solid #00eaff; background: transparent; color: #00eaff; cursor: pointer; font: inherit; }
 .ruta-rockera-reset:hover { background: rgba(0,234,255,.15); }
+
+/* RUTA-PINS-STYLE */
+.rq-pin-wrap { background: transparent; border: 0; }
+.rq-pin, .legend-dot { display: inline-block; width: 16px; height: 16px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 6px rgba(0,0,0,.6); vertical-align: middle; margin-right: .4rem; }
+.rq-pin-bar, .legend-bar { background: #ff3b3b; }
+.rq-pin-cultural, .legend-cultural { background: #00eaff; }
+.rq-pin-historical, .legend-historical { background: #ffb400; }
