@@ -4,3 +4,7 @@ __pycache__/
 instance/
 .env
 *.db
+_backups/
+*.backup*
+fix-rockquest.ps1
+PROJECT_REPORT.md
