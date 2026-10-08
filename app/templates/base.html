@@ -13,7 +13,9 @@
 <body>
     <video id="video-bg" autoplay muted playsinline
            poster="{{ url_for('static', filename='images/rock-poster.jpg') }}"
-           data-base-url="{{ url_for('static', filename='videos/') }}"></video>
+           data-base-url="{{ url_for('static', filename='videos/') }}" loop preload="auto">
+    <source src="{{ url_for('static', filename='videos/rockquest-bg.mp4') }}" type="video/mp4">
+  </video>
     <div class="video-overlay"></div>
 
     <nav class="navbar">
@@ -35,7 +37,6 @@
     <main>
         {% block content %}{% endblock %}
     </main>
-    <script src="{{ url_for('static', filename='js/video-bg.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     {% block scripts %}{% endblock %}
 </body>
