@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/hover.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -18,25 +19,55 @@
   </video>
     <div class="video-overlay"></div>
 
-    <nav class="navbar">
-        <div class="navbar-logo">ROCK<span>QUEST</span></div>
-        <ul class="navbar-links">
-            <li><a class="hvr-underline-from-center" href="{{ url_for('main.index') }}">Inicio</a></li>
-            <li><a class="hvr-underline-from-center" href="{{ url_for('main.historia') }}">Historia</a></li>
-            <li><a class="hvr-underline-from-center" href="{{ url_for('main.linea_del_tiempo') }}">Línea del tiempo</a></li>
-            <li><a class="hvr-underline-from-center" href="{{ url_for('main.decadas') }}">Décadas</a></li>
-            <li><a class="hvr-underline-from-center" href="{{ url_for('main.subgeneros') }}">Subgéneros</a></li>
-            <li><a class="hvr-underline-from-center" href="{{ url_for('main.bandas') }}">Bandas</a></li>
-            <li><a class="hvr-underline-from-center" href="{{ url_for('main.artistas') }}">Artistas</a></li>
-            <li><a class="hvr-underline-from-center" href="{{ url_for('main.grammys') }}">Grammys</a></li>
-            <li><a class="hvr-underline-from-center" href="{{ url_for('main.records') }}">Récords</a></li>
-            <li><a class="hvr-underline-from-center" href="{{ url_for('main.trivia') }}">Trivia</a></li>
-            <li><a class="hvr-underline-from-center" href="{{ url_for('main.ruta_rockera') }}">Ruta Rockera</a></li>
+    <nav class="navbar" aria-label="Principal">
+        <a class="navbar-logo" href="{{ url_for('main.index') }}#inicio">ROCK<span>QUEST</span></a>
+        <button class="nav-toggle" type="button" aria-label="Abrir men&uacute;" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
+        <ul class="navbar-links" id="nav-menu">
+            <li class="nav-group">
+                <button class="nav-group-btn" type="button" aria-expanded="false">Explorar <span aria-hidden="true">&#9662;</span></button>
+                <ul class="nav-sub">
+                    <li><a href="{{ url_for('main.index') }}#historia">Historia</a></li>
+                    <li><a href="{{ url_for('main.index') }}#linea-del-tiempo">L&iacute;nea del tiempo</a></li>
+                    <li><a href="{{ url_for('main.index') }}#decadas">D&eacute;cadas</a></li>
+                    <li><a href="{{ url_for('main.index') }}#subgeneros">Subg&eacute;neros</a></li>
+                </ul>
+            </li>
+            <li class="nav-group">
+                <button class="nav-group-btn" type="button" aria-expanded="false">M&uacute;sica <span aria-hidden="true">&#9662;</span></button>
+                <ul class="nav-sub">
+                    <li><a href="{{ url_for('main.index') }}#bandas">Bandas</a></li>
+                    <li><a href="{{ url_for('main.index') }}#artistas">Artistas</a></li>
+                    <li><a href="{{ url_for('main.index') }}#grammys">Grammys</a></li>
+                    <li><a href="{{ url_for('main.index') }}#records">R&eacute;cords</a></li>
+                </ul>
+            </li>
+            <li><a class="nav-link" href="{{ url_for('main.index') }}#trivia">Trivia</a></li>
+            <li><a class="nav-link nav-cta" href="{{ url_for('main.index') }}#ruta-rockera">Ruta Rockera</a></li>
         </ul>
     </nav>
     <main>
         {% block content %}{% endblock %}
     </main>
+    <footer class="site-footer" id="contacto">
+    <div class="sf-inner">
+        <div class="sf-brand">
+            <span class="sf-logo">ROCK<span>QUEST</span></span>
+            <p>Aqu&iacute; el Rock importa, mi pana</p>
+        </div>
+        <div class="sf-contact">
+            <p class="sf-title">Contacto</p>
+            <ul class="sf-links">
+                <li><a class="sf-btn sf-wa" href="https://wa.me/573165192825?text=Hola%2C%20vi%20RockQuest" target="_blank" rel="noopener noreferrer"><b>WhatsApp</b><small>+57 316 519 2825</small></a></li>
+                <li><a class="sf-btn sf-ig" href="https://instagram.com/barramovilpzo" target="_blank" rel="noopener noreferrer"><b>Instagram</b><small>@barramovilpzo</small></a></li>
+                
+                <li><a class="sf-btn sf-pf" href="https://portfolio-hub-90zb.onrender.com/" target="_blank" rel="noopener noreferrer"><b>Portafolio</b><small>Mis proyectos</small></a></li>
+                <li><a class="sf-btn sf-gh" href="https://github.com/alvaroberrio23242-eng" target="_blank" rel="noopener noreferrer"><b>GitHub</b><small>alvaroberrio23242-eng</small></a></li>
+            </ul>
+        </div>
+    </div>
+    <p class="sf-legal">&copy; 2026 RockQuest &middot; Hecho en Medell&iacute;n</p>
+</footer>
+    <script src="{{ url_for('static', filename='js/nav.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     {% block scripts %}{% endblock %}
 </body>

@@ -1,0 +1,38 @@
+<section class="ruta-rockera-page">
+    <header class="rr-head">
+        <span class="rr-kicker">ROCKQUEST</span>
+        <h1>Ruta Rockera <span class="of">de Antioquia</span></h1>
+        <p>Un recorrido por bares, escenarios, espacios culturales y lugares hist&oacute;ricos vinculados con el rock en Medell&iacute;n y el Valle de Aburr&aacute;.</p>
+    </header>
+
+    <div class="rr-layout">
+        <aside class="rr-panel" aria-label="Explorar lugares">
+            <div>
+                <h2>EXPLORA <small>/ Find your sound</small></h2>
+                <p class="rr-count"><b id="places-count">0</b> <span id="places-count-label">spots</span> &middot; Medell&iacute;n y Valle de Aburr&aacute; <button type="button" id="reset-map" class="rr-reset" hidden>Reset</button></p>
+            </div>
+
+            <input id="search-place" class="rr-search" type="search" placeholder="Bar, escenario, barrio... / search" autocomplete="off" aria-label="Buscar lugares">
+
+            <p class="rr-label">Tipo / Vibe</p>
+            <div class="rr-chips" id="type-chips" role="group" aria-label="Tipo de lugar">
+                <button type="button" class="rr-chip on" data-layer="" aria-pressed="true">Todos <em class="rr-n"></em></button>
+                <button type="button" class="rr-chip" data-layer="rock" aria-pressed="false"><i class="rr-dot" style="--c:#ff2e4d"></i>Bares &amp; live <em class="rr-n"></em></button>
+                <button type="button" class="rr-chip" data-layer="culture" aria-pressed="false"><i class="rr-dot" style="--c:#19e6ff"></i>Museos &amp; cultura <em class="rr-n"></em></button>
+                <button type="button" class="rr-chip" data-layer="history" aria-pressed="false"><i class="rr-dot" style="--c:#ffc400"></i>Hist&oacute;ricos <em class="rr-n"></em></button>
+            </div>
+
+            <details class="rr-more">
+                <summary>Municipio: <b id="city-now">Todos</b></summary>
+                <div class="rr-chips" id="city-chips" role="group" aria-label="Municipio"></div>
+            </details>
+
+            <div id="places-list" class="rr-list" aria-live="polite"></div>
+        </aside>
+
+        <div class="rr-map-wrap">
+            <div id="ruta-rockera-map" aria-label="Mapa interactivo de la Ruta Rockera"></div>
+            <div id="map-status" class="rr-status" role="status">Cargando lugares verificados...</div>
+        </div>
+    </div>
+</section>

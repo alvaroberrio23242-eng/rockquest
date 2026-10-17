@@ -1,10 +1,69 @@
 {% extends "base.html" %}
-{% block title %}RockQuest — Inicio{% endblock %}
+{% block title %}RockQuest - La historia del Rock{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/onepage.css') }}">
+{% include "sections/ruta_rockera_head.html" %}
+{% include "sections/historia_head.html" %}
+{% include "sections/linea_del_tiempo_head.html" %}
+{% include "sections/decadas_head.html" %}
+{% include "sections/subgeneros_head.html" %}
+{% include "sections/bandas_head.html" %}
+{% include "sections/artistas_head.html" %}
+{% include "sections/grammys_head.html" %}
+{% include "sections/records_head.html" %}
+{% include "sections/trivia_head.html" %}
+{% endblock %}
 {% block content %}
-<section class="hero">
-    <div class="hero-glass">
-        <h1 class="hero-title">Bienvenido a <span>RockQuest</span></h1>
-        <p class="hero-subtitle">La historia del Rock, en una experiencia interactiva.</p>
+<section id="inicio" class="rq-hero">
+    <div class="rq-hero-card">
+        <span class="rq-hero-kicker">La historia del Rock, en una experiencia interactiva</span>
+        <h1 class="rq-hero-title">ROCK<span>QUEST</span></h1>
+        <p class="rq-hero-subtitle">Aqu&iacute; el Rock importa, mi pana</p>
+        <a class="rq-hero-cta" href="#ruta-rockera">Explorar la Ruta Rockera &darr;</a>
+        <p class="rq-hero-proof"><b id="hero-count">14</b> lugares verificados &middot; Medell&iacute;n y Valle de Aburr&aacute;</p>
     </div>
 </section>
+<section id="ruta-rockera" class="onepage-section">
+{% include "sections/ruta_rockera.html" %}
+</section>
+<section id="historia" class="onepage-section">
+{% include "sections/historia.html" %}
+</section>
+<section id="linea-del-tiempo" class="onepage-section">
+{% include "sections/linea_del_tiempo.html" %}
+</section>
+<section id="decadas" class="onepage-section">
+{% include "sections/decadas.html" %}
+</section>
+<section id="subgeneros" class="onepage-section">
+{% include "sections/subgeneros.html" %}
+</section>
+<section id="bandas" class="onepage-section">
+{% include "sections/bandas.html" %}
+</section>
+<section id="artistas" class="onepage-section">
+{% include "sections/artistas.html" %}
+</section>
+<section id="grammys" class="onepage-section">
+{% include "sections/grammys.html" %}
+</section>
+<section id="records" class="onepage-section">
+{% include "sections/records.html" %}
+</section>
+<section id="trivia" class="onepage-section">
+{% include "sections/trivia.html" %}
+</section>
+<a href="#" class="back-top" aria-label="Volver arriba">&uarr;</a>
+{% endblock %}
+{% block scripts %}
+{% include "sections/ruta_rockera_scripts.html" %}
+{% include "sections/historia_scripts.html" %}
+{% include "sections/linea_del_tiempo_scripts.html" %}
+{% include "sections/decadas_scripts.html" %}
+{% include "sections/subgeneros_scripts.html" %}
+{% include "sections/bandas_scripts.html" %}
+{% include "sections/artistas_scripts.html" %}
+{% include "sections/grammys_scripts.html" %}
+{% include "sections/records_scripts.html" %}
+{% include "sections/trivia_scripts.html" %}
 {% endblock %}

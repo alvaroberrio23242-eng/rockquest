@@ -15,7 +15,34 @@ main_bp = Blueprint('main', __name__)
 
 @main_bp.route('/')
 def index():
-    return render_template('index.html')
+    # Pagina unica: reune el contexto de todas las secciones.
+    todas = Banda.query.order_by(Banda.popularidad.desc()).all()
+    bandas_por_decada = {}
+    for b in todas:
+        bandas_por_decada.setdefault(b.decada_principal, []).append(b)
+    bandas_por_subgenero = {}
+    for sub in SUBGENEROS:
+        match = sub['genero_match'].lower()
+        bandas_por_subgenero[sub['slug']] = [b for b in todas if match in (b.genero or '').lower()]
+    orden = request.args.get('orden', 'popularidad')
+    columnas_validas = {
+        'popularidad': Banda.popularidad,
+        'grammys': Banda.grammys_totales,
+        'ventas': Banda.ventas_estimadas,
+        'influencia': Banda.indice_influencia,
+    }
+    columna = columnas_validas.get(orden, Banda.popularidad)
+    return render_template(
+        'index.html',
+        capitulos=CAPITULOS, hitos=HITOS, decadas=DECADAS,
+        bandas_por_decada=bandas_por_decada,
+        subgeneros=SUBGENEROS, bandas_por_subgenero=bandas_por_subgenero,
+        bandas=Banda.query.order_by(columna.desc()).all(), orden_actual=orden,
+        artistas=Artista.query.order_by(Artista.anio_nacimiento.asc()).all(),
+        grammys=Grammy.query.order_by(Grammy.anio.asc()).all(),
+        records=Record.query.order_by(Record.anio.asc()).all(),
+        preguntas=PREGUNTAS,
+    )
 
 
 @main_bp.route('/historia')

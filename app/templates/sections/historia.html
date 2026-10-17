@@ -1,0 +1,37 @@
+
+<section class="page-header">
+    <div class="page-header-glass">
+        <h1 class="page-title">Historia del <span>Rock</span></h1>
+        <p class="page-subtitle">Cómo nació el rock y cómo se transformó con el tiempo.</p>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="decadas-stack">
+        {% for cap in capitulos %}
+        <div class="content-glass decada-card" id="{{ cap.slug }}">
+            <div class="decada-encabezado">
+                <h2>{{ cap.titulo }}</h2>
+                <span class="decada-anios">{{ cap.rango }}</span>
+            </div>
+            <p>{{ cap.texto }}</p>
+            <div class="decada-chips">
+                {% for d in cap.destacados %}
+                <span class="chip hvr-grow">{{ d }}</span>
+                {% endfor %}
+            </div>
+            {% if cap.enlace %}
+            <p><a class="hvr-underline-from-center" href="{{ cap.enlace.href }}">{{ cap.enlace.texto }} →</a></p>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <div class="content-glass decada-card">
+            <h2>Sigue explorando</h2>
+            <p>
+                <a class="hvr-underline-from-center" href="/linea-del-tiempo">Línea del tiempo</a> ·
+                <a class="hvr-underline-from-center" href="/decadas">Rock por décadas</a> ·
+                <a class="hvr-underline-from-center" href="/subgeneros">Subgéneros</a>
+            </p>
+        </div>
+    </div>
+</section>
